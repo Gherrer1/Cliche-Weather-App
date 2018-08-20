@@ -11,6 +11,7 @@ class CityInput extends React.Component {
 		};
 
 		this.updateCityText = this.updateCityText.bind(this);
+		this.inputEmpty = this.inputEmpty.bind(this);
 	}
 
 	updateCityText(event) {
@@ -18,6 +19,10 @@ class CityInput extends React.Component {
 		this.setState({
 			city: newText,
 		});
+	}
+
+	inputEmpty() {
+		return this.state.city.trim().length === 0;
 	}
 
 	render() {
@@ -31,10 +36,10 @@ class CityInput extends React.Component {
 					onChange={this.updateCityText}
 				/>
 				<Link
-					className='get-weather-btn'
+					className={`get-weather-btn ${this.inputEmpty() ? 'disabled-btn' : ''}`}
 					to={`/forecast?city=${this.state.city.trim()}`}
 					onClick={
-						e => this.state.city.trim().length === 0 && e.preventDefault()
+						e => this.inputEmpty() && e.preventDefault()
 					}
 				>
 				Get Weather

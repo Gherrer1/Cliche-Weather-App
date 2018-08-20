@@ -26,6 +26,11 @@ body {
     font-size: 16px;
 }
 
+.disabled-btn {
+    background-color: grey;
+    border: 1px solid grey;
+}
+
 .city-input {
     border: 1px solid #ccc;
     color: #555;
