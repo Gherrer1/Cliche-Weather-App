@@ -1,11 +1,8 @@
 const React = require('react');
-const { BrowserRouter: Router, Route, Link } = require('react-router-dom');
+const { BrowserRouter: Router, Route, Link, Switch } = require('react-router-dom');
 const Nav = require('./Nav');
 const Forecast = require('./Forecast');
-
-function FakeHome() {
-	return <div>Home</div>;
-}
+const Home = require('./Home');
 
 function FakeDetail() {
 	return <div>Detail</div>;
@@ -17,9 +14,12 @@ function App() {
 			<div>
 				<Nav />
 				<Link to='/forecast'>Forecast</Link>
-				<Route exact path='/' component={FakeHome} />
-				<Route path='/forecast' component={Forecast} />
-				<Route path='/details' component={FakeDetail} />
+				<Switch>
+					<Route exact path='/' component={Home} />
+					<Route path='/forecast' component={Forecast} />
+					<Route path='/details' component={FakeDetail} />
+					<Route component={() => (<div>404</div>)} />
+				</Switch>
 			</div>
 		</Router>
 	);
