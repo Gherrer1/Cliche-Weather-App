@@ -3,7 +3,7 @@ const CityInput = require('./CityInput');
 
 function Nav() {
 	return (
-		<div id="nav">
+		<div id='nav'>
 			<h1>Cliche Weather App</h1>
 			<CityInput />
 		</div>

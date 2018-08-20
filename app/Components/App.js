@@ -1,13 +1,10 @@
 const React = require('react');
-const Router = require('react-router-dom').BrowserRouter;
+const { BrowserRouter: Router, Route, Link } = require('react-router-dom');
 const Nav = require('./Nav');
+const Forecast = require('./Forecast');
 
 function FakeHome() {
 	return <div>Home</div>;
-}
-
-function FakeForecast() {
-	return <div>Forecast</div>;
 }
 
 function FakeDetail() {
@@ -19,6 +16,10 @@ function App() {
 		<Router>
 			<div>
 				<Nav />
+				<Link to='/forecast'>Forecast</Link>
+				<Route exact path='/' component={FakeHome} />
+				<Route path='/forecast' component={Forecast} />
+				<Route path='/details' component={FakeDetail} />
 			</div>
 		</Router>
 	);

@@ -12,6 +12,7 @@ module.exports = {
         "react/destructuring-assignment": 0,
         "import/no-extraneous-dependencies": 0,
         "react/forbid-prop-types": 0,
-        "react/jsx-one-expression-per-line": 0
+        "react/jsx-one-expression-per-line": 0,
+        "jsx-quotes": ["error", "prefer-single"]
     }
 };
