@@ -1,3 +1,22 @@
-body div {
-    background: green;
+.get-weather-btn {
+    margin: 10px;
+    text-decoration: none;
+    border: 1px solid #5cb85c;
+    border-radius: 3px;
+    padding: 7px;
+    width: 100px;
+    background-color: #5cb85c;
+    color: white;
+    text-align: center;
+    font: 400 11px system-ui;
+    font-size: 16px;
+}
+
+.city-input {
+    border: 1px solid #ccc;
+    color: #555;
+    padding: 6px 12px;
+    font-size: 14px;
+    border-radius: 3px;
+    height: 34px;
 }
