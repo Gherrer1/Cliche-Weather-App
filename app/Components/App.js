@@ -1,5 +1,5 @@
 const React = require('react');
-const { BrowserRouter: Router, Route, Link, Switch } = require('react-router-dom');
+const { BrowserRouter: Router, Route, Switch } = require('react-router-dom');
 const Nav = require('./Nav');
 const Forecast = require('./Forecast');
 const Home = require('./Home');
@@ -13,7 +13,6 @@ function App() {
 		<Router>
 			<div>
 				<Nav />
-				<Link to='/forecast'>Forecast</Link>
 				<Switch>
 					<Route exact path='/' component={Home} />
 					<Route path='/forecast' component={Forecast} />

@@ -34,3 +34,9 @@ body {
     border-radius: 3px;
     height: 34px;
 }
+
+.home {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

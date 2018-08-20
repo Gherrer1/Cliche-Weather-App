@@ -24,15 +24,18 @@ class CityInput extends React.Component {
 		return (
 			<div style={this.props.style}>
 				<input
-					type="text"
-					className="city-input"
-					placeholder="St. George, Utah"
+					type='text'
+					className='city-input'
+					placeholder='St. George, Utah'
 					value={this.state.city}
 					onChange={this.updateCityText}
 				/>
 				<Link
-					className="get-weather-btn"
+					className='get-weather-btn'
 					to={`/forecast?city=${this.state.city.trim()}`}
+					onClick={
+						e => this.state.city.trim().length === 0 && e.preventDefault()
+					}
 				>
 				Get Weather
 				</Link>
