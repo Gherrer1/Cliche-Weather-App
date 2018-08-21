@@ -37,7 +37,10 @@ class CityInput extends React.Component {
 				/>
 				<Link
 					className={`get-weather-btn ${this.inputEmpty() ? 'disabled-btn' : ''}`}
-					to={`/forecast?city=${this.state.city.trim()}`}
+					to={{
+						pathname: '/forecast',
+						search: `?city=${this.state.city}`,
+					}}
 					onClick={
 						e => this.inputEmpty() && e.preventDefault()
 					}
