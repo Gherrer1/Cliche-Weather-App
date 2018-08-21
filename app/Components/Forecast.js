@@ -2,6 +2,7 @@ const React = require('react');
 const PropTypes = require('prop-types');
 const { Link } = require('react-router-dom');
 const queryString = require('query-string');
+const api = require('../utils/api');
 
 class Forecast extends React.Component {
 	constructor(props) {
