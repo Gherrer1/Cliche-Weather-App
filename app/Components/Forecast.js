@@ -11,24 +11,35 @@ class Forecast extends React.Component {
 		this.state = {
 			loading: true,
 			forecastData: null,
+			error: false,
 		};
 	}
 
 	componentDidMount() {
 		const parsedQuery = queryString.parse(this.props.location.search);
-		setTimeout(() => this.setState({
-			loading: false,
-			forecastData: {
-				city: parsedQuery.city,
-			},
-		}), 1500);
+		const { city } = parsedQuery;
+		api.getFiveDayForcast(city)
+			.then(response => this.setState({
+				loading: false,
+				error: false,
+				forecastData: {
+					city: response.city.name,
+					fiveDataData: response.list,
+				},
+			}))
+			.catch(() => this.setState({
+				loading: false,
+				error: true,
+			}));
 	}
 
 	render() {
-		const parsedQuery = queryString.parse(this.props.location.search);
 		let viewMeat;
 		if (this.state.loading) {
 			viewMeat = <div>Loading</div>;
+		}
+		if (this.state.error) {
+			viewMeat = <div>There was an error processing your request.</div>;
 		}
 		if (this.state.forecastData) {
 			viewMeat = <div>{JSON.stringify(this.state.forecastData)}</div>;
