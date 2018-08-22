@@ -20,6 +20,7 @@
   "homepage": "https://github.com/Gherrer1/Cliche-Weather-App#readme",
   "dependencies": {
     "axios": "^0.18.0",
+    "moment": "^2.22.2",
     "query-string": "^6.1.0",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",

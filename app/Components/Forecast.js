@@ -2,7 +2,14 @@ const React = require('react');
 const PropTypes = require('prop-types');
 const { Link } = require('react-router-dom');
 const queryString = require('query-string');
+const WeatherCard = require('./WeatherCard');
 const api = require('../utils/api');
+
+function getWeatherCardsFor5days(forecasts) {
+	return forecasts.map(forecast => (
+		<WeatherCard key={forecast.dt} forecast={forecast} />
+	));
+}
 
 class Forecast extends React.Component {
 	constructor(props) {
@@ -10,7 +17,8 @@ class Forecast extends React.Component {
 
 		this.state = {
 			loading: true,
-			forecastData: null,
+			city: null,
+			fiveDayForecast: null,
 			error: false,
 		};
 	}
@@ -22,10 +30,8 @@ class Forecast extends React.Component {
 			.then(response => this.setState({
 				loading: false,
 				error: false,
-				forecastData: {
-					city: response.city.name,
-					fiveDataData: response.list,
-				},
+				city: response.city.name,
+				fiveDayForecast: response.list,
 			}))
 			.catch(() => this.setState({
 				loading: false,
@@ -35,22 +41,26 @@ class Forecast extends React.Component {
 
 	render() {
 		let viewMeat;
+		const { city, fiveDayForecast } = this.state;
 		if (this.state.loading) {
 			viewMeat = <div>Loading</div>;
 		}
 		if (this.state.error) {
 			viewMeat = <div>There was an error processing your request.</div>;
 		}
-		if (this.state.forecastData) {
-			viewMeat = <div>{JSON.stringify(this.state.forecastData)}</div>;
+		if (this.state.fiveDayForecast) {
+			viewMeat = getWeatherCardsFor5days(fiveDayForecast);
 		}
 		return (
-			<div>
+			<div className='forecast-view'>
 				<Link to='/'>Back</Link>
 				<br />
 				<Link to='/details'>Detail</Link>
 				<br />
-				{viewMeat}
+				{this.state.city && <h1>{this.state.city}</h1>}
+				<div className='weather-cards'>
+					{viewMeat}
+				</div>
 			</div>
 		);
 	}
