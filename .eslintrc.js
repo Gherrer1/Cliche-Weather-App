@@ -13,6 +13,7 @@ module.exports = {
         "import/no-extraneous-dependencies": 0,
         "react/forbid-prop-types": 0,
         "react/jsx-one-expression-per-line": 0,
-        "jsx-quotes": ["error", "prefer-single"]
+        "jsx-quotes": ["error", "prefer-single"],
+        "jsx-a11y/click-events-have-key-events": 0
     }
 };

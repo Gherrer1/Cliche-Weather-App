@@ -1,14 +1,17 @@
 const React = require('react');
 const PropTypes = require('prop-types');
-const { diff } = require('deep-object-diff');
 const { Link } = require('react-router-dom');
 const queryString = require('query-string');
 const WeatherCard = require('./WeatherCard');
 const api = require('../utils/api');
 
-function getWeatherCardsFor5days(forecasts) {
+function getWeatherCardsFor5days(forecasts, clickHandler) {
 	return forecasts.map(forecast => (
-		<WeatherCard key={forecast.dt} forecast={forecast} />
+		<WeatherCard
+			key={forecast.dt}
+			forecast={forecast}
+			handleClick={clickHandler}
+		/>
 	));
 }
 
@@ -24,6 +27,7 @@ class Forecast extends React.Component {
 		};
 
 		this.fetchDataForCity = this.fetchDataForCity.bind(this);
+		this.handleClick = this.handleClick.bind(this);
 	}
 
 	componentDidMount() {
@@ -61,6 +65,13 @@ class Forecast extends React.Component {
 			}));
 	}
 
+	handleClick(forecast, date) {
+		this.props.history.push({
+			pathname: `/details/${date}`,
+			state: forecast,
+		});
+	}
+
 	render() {
 		let viewMeat;
 		const { fiveDayForecast } = this.state;
@@ -71,7 +82,7 @@ class Forecast extends React.Component {
 			viewMeat = <div>There was an error processing your request.</div>;
 		}
 		if (this.state.fiveDayForecast) {
-			viewMeat = getWeatherCardsFor5days(fiveDayForecast);
+			viewMeat = getWeatherCardsFor5days(fiveDayForecast, this.handleClick);
 		}
 		return (
 			<div className='forecast-view'>
@@ -89,6 +100,7 @@ class Forecast extends React.Component {
 }
 Forecast.propTypes = {
 	location: PropTypes.object.isRequired,
+	history: PropTypes.object.isRequired,
 };
 
 module.exports = Forecast;
