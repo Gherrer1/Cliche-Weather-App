@@ -1,14 +1,8 @@
 const React = require('react');
-const moment = require('moment');
 const PropTypes = require('prop-types');
+const formatDateFromDt = require('../utils/formatDate');
 
 const ICON_URI_PREFIX = 'http://openweathermap.org/img/w/';
-
-function formatDateFromDt(dt) {
-	const date = new Date(dt * 1000);
-	const formattedDate = moment(date).format('dddd, MMM Do');
-	return formattedDate;
-}
 
 function WeatherCard(props) {
 	const formattedDate = formatDateFromDt(props.forecast.dt);
