@@ -67,8 +67,8 @@ class Forecast extends React.Component {
 
 	handleClick(forecast, date) {
 		this.props.history.push({
-			pathname: `/details/${date}`,
-			state: forecast,
+			pathname: '/details',
+			search: `?city=${this.state.city}&dt=${forecast.dt}`,
 		});
 	}
 

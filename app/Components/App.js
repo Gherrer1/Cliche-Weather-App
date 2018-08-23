@@ -13,7 +13,7 @@ function App() {
 				<Switch>
 					<Route exact path='/' component={Home} />
 					<Route path='/forecast' component={Forecast} />
-					<Route path='/details/:date' component={ForecastDetail} />
+					<Route path='/details' component={ForecastDetail} />
 					<Route component={() => (<div>404</div>)} />
 				</Switch>
 			</div>
