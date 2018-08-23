@@ -1,5 +1,6 @@
 const React = require('react');
 const PropTypes = require('prop-types');
+const { diff } = require('deep-object-diff');
 const { Link } = require('react-router-dom');
 const queryString = require('query-string');
 const WeatherCard = require('./WeatherCard');
@@ -21,11 +22,32 @@ class Forecast extends React.Component {
 			fiveDayForecast: null,
 			error: false,
 		};
+
+		this.fetchDataForCity = this.fetchDataForCity.bind(this);
 	}
 
 	componentDidMount() {
 		const parsedQuery = queryString.parse(this.props.location.search);
 		const { city } = parsedQuery;
+		this.fetchDataForCity(city);
+	}
+
+	componentDidUpdate(prevProps) {
+		if (prevProps.location !== this.props.location) {
+			const parsedQuery = queryString.parse(this.props.location.search);
+			const { city } = parsedQuery;
+			this.fetchDataForCity(city);
+		}
+	}
+
+	fetchDataForCity(city) {
+		this.setState({
+			loading: true,
+			error: false,
+			city: null,
+			fiveDayForecast: null,
+		});
+
 		api.getFiveDayForcast(city)
 			.then(response => this.setState({
 				loading: false,
@@ -41,7 +63,7 @@ class Forecast extends React.Component {
 
 	render() {
 		let viewMeat;
-		const { city, fiveDayForecast } = this.state;
+		const { fiveDayForecast } = this.state;
 		if (this.state.loading) {
 			viewMeat = <div>Loading</div>;
 		}

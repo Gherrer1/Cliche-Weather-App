@@ -9,7 +9,7 @@ function App() {
 	return (
 		<Router>
 			<div>
-				<Nav />
+				<Route component={Nav} />
 				<Switch>
 					<Route exact path='/' component={Home} />
 					<Route path='/forecast' component={Forecast} />
